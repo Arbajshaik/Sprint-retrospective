@@ -160,6 +160,7 @@ public class ExcelReadWrite {
                     Cell cell = headerRow.createCell(i);
                     cell.setCellValue(columnHeaders[i]);
                     cell.setCellStyle(headerCellStyle);
+                    
                 }
             }
 
@@ -237,63 +238,9 @@ public class ExcelReadWrite {
             boolean lidExists = false;
             Sheet sheet = workbook.getSheetAt(0);
             if (Objects.nonNull(sheet)) {
-//                for (Row myrow : sheet) {
-//                    Cell lidCell = myrow.getCell(0);
-//                    lidCell.setCellType(CellType.STRING);
-//                    System.out.println(String.valueOf(lidCell));
-//					if ("LID".equalsIgnoreCase(String.valueOf(lidCell))) {
-//						Cell cell = myrow.getCell(1);
-//						cell.setCellType(CellType.STRING);
-//						cell.setCellValue(lid);
-//
-//					}
-//					if ("Westpac Email Id".equalsIgnoreCase(String.valueOf(lidCell))) {
-//						Cell cell = myrow.getCell(1);
-//						cell.setCellType(CellType.STRING);
-//						cell.setCellValue(sprintEmailid);
-//
-//					}
-//					if ("Feature Team Name".equalsIgnoreCase(String.valueOf(lidCell))) {
-//						Cell cell = myrow.getCell(1);
-//						cell.setCellType(CellType.STRING);
-//						cell.setCellValue(featureTeamName);
-//
-//					}
-//					if ("Project Name".equalsIgnoreCase(String.valueOf(lidCell))) {
-//						Cell cell = myrow.getCell(1);
-//						cell.setCellType(CellType.STRING);
-//						cell.setCellValue(projectName);
-//
-//					}
-//					if ("Spring Number".equalsIgnoreCase(String.valueOf(lidCell))) {
-//						Cell cell = myrow.getCell(1);
-//						cell.setCellType(CellType.STRING);
-//						cell.setCellValue(sprintNumber);
-//
-//					}
-//                 }
-//                Boolean rowDetection=false;
-//                int rowIndex=0;
-//                for (Row myrow : sheet) {
-//                    Cell lidCell = myrow.getCell(0);
-//                    lidCell.setCellType(CellType.STRING);
-//                    if("What went well in the Sprint".equalsIgnoreCase(String.valueOf(lidCell))) {
-//                    	rowDetection=true;
-//                    	rowIndex=0;
-//                    }
-//                    if(rowDetection==true&& (rowIndex!=0 && rowIndex <= 3)) {
-//                    	Cell cell = myrow.getCell(0);
-//						cell.setCellValue(rowIndex+". "+a1);
-//                    	
-//                    }
-//                    rowIndex++;
-//                 }
-            	 for (Row myrow : sheet) {
+            	int rownum = sheet.getLastRowNum();
+            	Row myrow = sheet.createRow(++rownum);
                    Cell lidCell = myrow.getCell(0);
-                   if(lidCell!=null) {
-                	   continue;
-                   }
-                   else if(lidCell==null && myrow.getRowNum()==1) {
                 	   lidCell=myrow.createCell(0);
                 	   lidCell.setCellType(CellType.STRING);
                 	   lidCell.setCellValue(lid);
@@ -305,23 +252,19 @@ public class ExcelReadWrite {
                 	   myrow.createCell(6).setCellValue(b1);
                 	   myrow.createCell(7).setCellValue(c1);
                 	   myrow.createCell(8).setCellValue(d1);
-                   }else if(lidCell==null && myrow.getRowNum()==2) {
+                	   myrow = sheet.createRow(++rownum);
                 	   myrow.createCell(5).setCellValue(a2);
                 	   myrow.createCell(6).setCellValue(b2);
                 	   myrow.createCell(7).setCellValue(c2);
                 	   myrow.createCell(8).setCellValue(d2);
-                   }
-                   else if(lidCell==null && myrow.getRowNum()==3) {
+                	   myrow = sheet.createRow(++rownum);
                 	   myrow.createCell(5).setCellValue(a3);
                 	   myrow.createCell(6).setCellValue(b3);
                 	   myrow.createCell(7).setCellValue(c3);
                 	   myrow.createCell(8).setCellValue(d3);
-                   }else {
-                	   break;
-                   }
-                   
-                   
-                }
+                 
+                  
+                
             } 
         }
             // Write the output to the file
